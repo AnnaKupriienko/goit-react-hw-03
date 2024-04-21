@@ -16,22 +16,21 @@ export default function App() {
     });
 
     const [filter, setFilter] = useState("");
-        useEffect(() => {
-            localStorage.setItem("contacts", JSON.stringify(contacts));
-}, [contacts]);
 
-    const deleteContact = (contactId) => {
-        setContacts((prevContacts) => {
-            return prevContacts.filter(contact => contact.id !== contactId)
-        })
-    };
+     useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts))}, [contacts]);
 
-    const filteredContact = contacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase()));
+    const filteredContact = contacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase().trim()));
  
     const addContact = (newContact) => {
         setContacts((prevContact) => {
             return [...prevContact, newContact]
         });
+    };
+       const deleteContact = (contactId) => {
+        setContacts((prevContacts) => {
+            return prevContacts.filter(contact => contact.id !== contactId)
+        })
     };
     return (
         <div>
