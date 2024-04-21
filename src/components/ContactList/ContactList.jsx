@@ -3,12 +3,11 @@ import css from "./ContactList.module.css"
 export default function ContactList({ contacts, onDelete }) {
     return (
         <ul>
-            {contacts.map(item => (
-                <li  className={css.list} key={contacts.id}>
-                    <Contact contact={item} onDelete={onDelete} />
-           </li>  
-         ))}   
+                {contacts.map(contact =>(
+                    <li className={css.list} key={contact.id}>
+                        <Contact name={contact.name} number={contact.number} id={contact.id} onDelete={onDelete} />
+                    </li>  ))
+         }
 
-       </ul>
-    );
-}
+            </ul>
+            )}

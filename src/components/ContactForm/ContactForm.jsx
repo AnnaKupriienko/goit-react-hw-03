@@ -2,27 +2,26 @@ import { nanoid } from 'nanoid'
 import { Formik, Form, Field, ErrorMessage} from 'formik';
 import * as yup from 'yup';
 import css from "./ContactForm.module.css";
-
-export default function ContactForm({ onSubmit }) {
-    const validation = yup.object({
-  username: yup.string().min(3).max(50).required(),
-  usernumber: yup.string().min(3).max(50).required(),
+const validation = yup.object({
+  username: yup.string().min(3, "Too short").max(50).required("Required"),
+  usernumber: yup.string().min(3,"Too short").max(50).required("Required"),
     });
-    
+export default function ContactForm({ onSubmit }) {
+    const handleSubmit = (values, actions) => {
+        onSubmit({
+            ...values,
+                id: nanoid(),
+                // username: values.username,
+                // usernumber: values.usernumber,
+            })
+          actions.resetForm();
+    }
     return (
         <Formik initialValues={{
             username: "",
             usernumber: ""
         }}
-            onSubmit ={(values,actions) => {
-            onSubmit({
-                id: nanoid(),
-                username: values.username,
-                usernumber: values.usernumber,
-            })
-                actions.resetForm();
-
-            }} validationSchema={validation}>
+            onSubmit={handleSubmit} validationSchema={validation}>
             <Form className={css.form}>
                 <div className={css.container}>
                 <label className={css.text} htmlFor="username"> Name</label>
