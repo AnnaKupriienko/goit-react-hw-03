@@ -8,10 +8,10 @@ import css from "./App.module.css"
 export default function App() { 
 
     const [contacts, setContacts] = useState(() => {
-        const savedContacts = localStorage.getItem('contacts');
-        if (savedContacts !== null) {
-            return JSON.parse(savedContacts)
-        }
+        // const savedContacts = localStorage.getItem('contacts');
+        // if (savedContacts !== null) {
+        //     return JSON.parse(savedContacts);
+        // }
         return list;
     });
 
